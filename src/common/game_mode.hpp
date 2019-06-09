@@ -58,6 +58,8 @@ struct GameMode {
     ui::MenuElementRenderer* mpUiRenderer;
     engine::TiledTexture* mpUiSpriteSheet;
     UserProfile* mpUserProfile;
+    bool isDone() const = 0;
+    std::unique_ptr<GameMode> nextMode() const = 0;
   };
 
   virtual ~GameMode() = default;

@@ -176,14 +176,19 @@ void Game::mainLoop() {
         break;
       }
 
-      if (mpNextGameMode) {
+      if (mpCurrentGameMode->isDone) {
         fadeOutScreen();
-        mpCurrentGameMode = std::move(mpNextGameMode);
+        mpCurrentGameMode = nextMode(); 
         mpCurrentGameMode->updateAndRender(0);
         fadeInScreen();
       }
 
       mpCurrentGameMode->updateAndRender(elapsed);
+      
+      if (mpCurrentGameMode->isDone)
+      {
+          mpCurrentGameMode = nextMode();
+      }
     }
 
     mRenderer.clear();
